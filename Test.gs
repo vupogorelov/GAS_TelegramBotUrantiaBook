@@ -27,11 +27,31 @@ function _setWebhook() {
   UrlFetchApp.fetch(url);
 }
 function testSend(){
-  bot_sendMessage(id_callback, "test");
+  // bot_sendMessage(id_callback, "test");
+  Debug('dsgsdfdfsddgs');
 }
 
 
 
+// github token
+// 252f13b92eec4ec6d95a917d3e75e092b643af2b
+
+/* -------------------------------------------------------------------------------
+
+   ведем запись изменений в историю
+
+   ------------------------------------------------------------------------------- */
+function Debug (text){
+  
+  var ss = SpreadsheetApp.openById("1kpuqyg5sIy2XYZnXYMBb4Tsrl4SSCWTBDw0aWs5V21Q");
+  var sheet = ss.getActiveSheet();
+  
+  var newDate = Utilities.formatDate(new Date(), "GMT", "yyyy.MM.dd");
+  var values = [[ newDate, text ]]; 
+  sheet.getRange(1, 1, 1, 2).setValues(values);
+  
+  
+}
 
 
 
