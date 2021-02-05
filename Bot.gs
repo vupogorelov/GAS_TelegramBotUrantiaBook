@@ -1,5 +1,6 @@
 const book = DriveApp.getFileById('12DwnnzlwRMRJ5d0gakOmc8xQw0V5S4ak').getBlob().getDataAsString();
 const token = '1476739596:AAEyV7EFAw8TTwDyLsN9DkvKS-slZ5K68BU';
+var webAppUrl = 'https://script.google.com/macros/s/AKfycbxJWROXwCbP5wQkleeuQxlUurL1L2kRqk8ReNSA2rRQSO9IHGe7sR1c/exec';
 
 /* -------------------------------------------------------------------------------
    ОБРАБОТЧИК событий бота
@@ -167,12 +168,20 @@ function bot_sendMessage(chatId, text, keyBoard) {
 
 }
 
-function setWebhook() {
-  var webAppUrl = 'https://script.google.com/macros/s/AKfycbxJWROXwCbP5wQkleeuQxlUurL1L2kRqk8ReNSA2rRQSO9IHGe7sR1c/exec';
-  var url = telegramUrl + "/setWebhook?url=" + webAppUrl;
-  var result = UrlFetchApp.fetch(url);
 
-  Logger.log(webAppUrl);
-  Logger.log(token);
+function setWebhook() {
+  var result = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + "/setWebhook?url=" + webAppUrl);
+  Logger.log(result);
+  getWebhookInfo();
+}
+
+function deleteWebhook() {
+  var result = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + "/deleteWebhook?url=" + webAppUrl);
+  Logger.log(result);
+  getWebhookInfo();
+}
+
+function getWebhookInfo() {
+  var result = UrlFetchApp.fetch('https://api.telegram.org/bot' + token + "/getWebhookInfo?url=" + webAppUrl);
   Logger.log(result);
 }
